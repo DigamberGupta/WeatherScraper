@@ -13,21 +13,37 @@
      
       $file_headers = @get_headers('http://www.weather-forecast.com/locations/'.$city.'/forecasts/latest');
       if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
-            $error = "City cannot be found..";
+            $error = "City could be found..";
       }
       else {
        
 
       $foreCastPage = file_get_contents("http://www.weather-forecast.com/locations/".$city."/forecasts/latest");
 
+
+
       $firstPage = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">',$foreCastPage);
 
-       $secoundPage = explode('</span></span></span>',$firstPage[1]);
+        if(sizeof($firstPage) > 1){
 
-       $displayWeather = $secoundPage[0];
-     }
+              $secoundPage = explode('</span></span></span>',$firstPage[1]);
 
-  }
+                      if(sizeof($secoundPage) > 1){
+
+                         $displayWeather = $secoundPage[0];
+
+                      }else{
+
+                        $error = "City could be found..";
+                      }
+
+                 }else{
+
+                       $error = "City colud be found..";
+             }
+
+      }
+}
 
 
 ?>
