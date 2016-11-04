@@ -36,8 +36,8 @@
         <form>
            
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="text" class="form-control" id="weather" aria-describedby="weatherHelp" placeholder="Enter the name of City">
+              <label for="exampleInputEmail1">Enter the name of city</label>
+              <input type="text" class="form-control" id="weather" aria-describedby="weatherHelp" placeholder="City">
               <small id="weatherHelp" class="form-text text-muted">Example : London ,Paris....</small>
             </div>
              <button type="submit" class="btn btn-primary">Submit</button>
