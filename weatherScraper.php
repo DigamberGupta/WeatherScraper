@@ -4,7 +4,7 @@
    $city = "";
    $error="";
 
-  if($_GET["city"]){
+  if(array_key_exists('city', $_GET)){
 
        // if (strstr($_GET["city"],' ')) {                      //......strstr Check the white space ...////
       $city =str_replace(' ','',$_GET["city"]);    //........str_replace the white space ... //
@@ -90,21 +90,33 @@
            
             <div class="form-group">
               <label for="exampleInputEmail1">Enter the name of city</label>
-              <input type="text" class="form-control" id="weather" aria-describedby="weatherHelp" placeholder="City" name="city"        value= "<?php echo $_GET['city'] ?> ">
+              <input type="text" class="form-control" id="weather" aria-describedby="weatherHelp" placeholder="City" name="city"        value= "<?php  if(array_key_exists('city', $_GET)){
+
+                                       echo $_GET['city'] ;
+                               }
+                                  
+                                   ?> ">
               <small id="weatherHelp" class="form-text text-muted">Example : London ,Paris....</small>
             </div>
              <button type="submit" class="btn btn-primary">Submit</button>
 
             
-            <?php  if($error){
+           <div id ="weatherDetail">
+            
+              <?php 
 
-                  echo '<div id ="weatherDetail" class="alert alert-danger" role="alert">'.$error.'</div>'; 
-              }else {
+                     if($displayWeather){
 
-                  echo '<div id ="weatherDetail" class="alert alert-success" role="alert">'.$displayWeather.'</div>'; 
-                }
+                          echo '<div  class="alert alert-success" role="alert">'.$displayWeather.'</div>'; 
+                          
+                      }else if($error) {
 
-            ?>    
+                          echo '<div  class="alert alert-danger" role="alert">'.$error.'</div>';
+                        }
+                  
+              ?>   
+
+            </div> 
 
 
             
