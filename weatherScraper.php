@@ -2,6 +2,13 @@
 
   if($_GET["city"]){
 
+      if (strstr($_GET["city"],' ')) {                      //......strstr Check the white space ...////
+      $_GET["city"] =str_replace(' ','-',$_GET["city"]);    //........str_replace the white space ... //
+     }
+
+     
+     
+
       $foreCastPage = file_get_contents("http://www.weather-forecast.com/locations/".$_GET["city"]."/forecasts/latest");
 
       $firstPage = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">',$foreCastPage);
