@@ -1,3 +1,27 @@
+<?php
+
+  if($_GET["city"]){
+
+      if (strstr($_GET["city"],' ')) {                      //......strstr Check the white space ...////
+      $_GET["city"] =str_replace(' ','-',$_GET["city"]);    //........str_replace the white space ... //
+     }
+
+     
+     
+
+      $foreCastPage = file_get_contents("http://www.weather-forecast.com/locations/".$_GET["city"]."/forecasts/latest");
+
+      $firstPage = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">',$foreCastPage);
+
+       $secoundPage = explode('</span></span></span>',$firstPage[1]);
+
+       //echo $secoundPage[0];
+
+  }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,10 +44,13 @@
 
                 .container{
                   text-align: center;
-                  margin-top:200px;
+                  margin-top:80px;
                   width: 450px;
                 }
 
+                #weatherDetail {
+                  margin-top: 20px;
+                }
 
     </style>
 
@@ -36,11 +63,13 @@
         <form>
            
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="text" class="form-control" id="weather" aria-describedby="weatherHelp" placeholder="Enter the name of City">
+              <label for="exampleInputEmail1">Enter the name of city</label>
+              <input type="text" class="form-control" id="weather" aria-describedby="weatherHelp" placeholder="City" name="city">
               <small id="weatherHelp" class="form-text text-muted">Example : London ,Paris....</small>
             </div>
              <button type="submit" class="btn btn-primary">Submit</button>
+
+            <div id ="weatherDetail" class="alert alert-success" role="alert"><?php echo $secoundPage[0] ?>    </div>
        </form>
      </div>
 
